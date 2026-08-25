@@ -3,63 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlixLink Sports - Descarga Oficial</title>
+    <title>FlixLink Engine - Streaming de Vanguardia</title>
+    <!-- Carga de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        appbg: '#04060c',
-                        cardbg: 'rgba(13, 20, 36, 0.75)',
-                        borderline: 'rgba(255, 255, 255, 0.08)'
+                        background: '#04060c',
+                        card: 'rgba(13, 20, 36, 0.65)',
+                        border: 'rgba(255, 255, 255, 0.1)',
+                        primary: '#00f2fe',
+                        secondary: '#0066ff'
+                    },
+                    backgroundImage: {
+                        'glass-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
                     }
                 }
             }
         }
     </script>
+    <style>
+        /* Ajustes base y tipografía de sistema nativa */
+        body {
+            background-color: theme('colors.background');
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            selection-background: theme('colors.primary');
+            selection-color: black;
+        }
+
+        /* Estilo Cristal (Glassmorphism) */
+        .glass-panel {
+            background: theme('backgroundImage.glass-gradient');
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid theme('colors.border');
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            border-radius: 1.5rem;
+        }
+
+        .glass-button {
+            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.secondary'));
+            color: #000;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+        }
+
+        .glass-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.5);
+        }
+
+        .glass-badge {
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: theme('colors.primary');
+            backdrop-filter: blur(10px);
+        }
+
+        /* Efectos de fondo */
+        .ambient-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: theme('colors.primary');
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .glow-1 { top: -100px; left: -100px; }
+        .glow-2 { bottom: -100px; right: -100px; background: theme('colors.secondary'); }
+
+        /* Animación suave al cargar */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+    </style>
 </head>
-<body class="bg-appbg text-white min-h-screen flex flex-col items-center justify-center p-6 font-sans antialiased selection:bg-cyan-500 selection:text-black">
-    
-    <div class="max-w-3xl w-full text-center space-y-10 relative z-10">
-        <!-- Cabecera -->
-        <header class="space-y-4">
-            <h1 class="text-5xl md:text-7xl font-black tracking-tighter text-white">
-                FlixLink<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 italic">Sports</span>
+<body class="relative">
+
+    <!-- Luces de fondo -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2 fixed"></div>
+
+    <!-- Contenedor Principal -->
+    <main class="max-w-6xl mx-auto px-6 py-12 md:py-20 min-h-screen flex flex-col justify-center relative z-10">
+        
+        <!-- Cabecera / Hero -->
+        <header class="text-center mb-16 fade-in-up">
+            <div class="inline-block mb-4 px-4 py-1 rounded-full glass-badge text-sm font-bold tracking-widest uppercase">
+                <span class="mr-2">🔒</span> Acceso Privado Exclusivo
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6">
+                FlixLink <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary italic">Engine</span>
             </h1>
-            <p class="text-gray-400 text-lg md:text-xl font-medium max-w-xl mx-auto">
-                El centro definitivo de streaming deportivo. Competiciones en directo, análisis de latencia en tiempo real y seguridad P2P.
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
+                El motor de streaming definitivo para Android y Desktop. Un ecosistema de scripts Python ultraligeros diseñados para el máximo rendimiento y seguridad.
             </p>
         </header>
 
-        <!-- Botón de Descarga Principal -->
-        <div class="py-4">
-            <a href="https://github.com/proartixproxy-boop/FlixLink" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-600 text-black font-black text-lg rounded-2xl shadow-[0_10px_30px_rgba(0,242,254,0.3)] hover:scale-105 hover:shadow-[0_10px_40px_rgba(0,242,254,0.5)] transition-all duration-300">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                Descargar APK
-            </a>
+        <!-- Cuadrícula de Características de los Scripts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            
+            <!-- Tarjeta 1: FlixLink Sports -->
+            <div class="glass-panel p-8 flex flex-col items-start fade-in-up delay-100 transition-transform duration-300 hover:-translate-y-2">
+                <div class="w-12 h-12 rounded-full bg-blue-900/50 flex items-center justify-center mb-6 border border-blue-500/30">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-white">FlixLink Sports</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+                    Transmisiones en directo con un sistema inteligente de verificación de latencia. Desencripta enlaces ofuscados al vuelo y selecciona automáticamente el servidor más rápido para cero cortes.
+                </p>
+            </div>
+
+            <!-- Tarjeta 2: FlixLink Glass (Catálogo) -->
+            <div class="glass-panel p-8 flex flex-col items-start fade-in-up delay-200 transition-transform duration-300 hover:-translate-y-2">
+                <div class="w-12 h-12 rounded-full bg-blue-900/50 flex items-center justify-center mb-6 border border-blue-500/30">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-white">FlixLink Glass V2</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+                    Catálogo de cine y series alimentado por un motor SQLite ultra-optimizado. Interfaz <em>Glassmorphism</em> adaptativa con metadatos de TMDB y resolución 4K nativa.
+                </p>
+            </div>
+
+            <!-- Tarjeta 3: Seguridad y P2P -->
+            <div class="glass-panel p-8 flex flex-col items-start fade-in-up delay-300 transition-transform duration-300 hover:-translate-y-2">
+                <div class="w-12 h-12 rounded-full bg-blue-900/50 flex items-center justify-center mb-6 border border-blue-500/30">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-white">Criptografía AES</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+                    Las conexiones están protegidas por el motor <em>OfflineSecurityCore</em>. Los enlaces se cifran mediante algoritmos AES-OFB y el acceso se restringe mediante protocolos de invitación caducables.
+                </p>
+            </div>
         </div>
 
-        <!-- Características -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-left pt-6">
-            <div class="bg-cardbg border border-borderline p-6 rounded-2xl backdrop-blur-sm">
-                <h3 class="text-cyan-400 font-extrabold text-lg mb-2">Catálogo Global</h3>
-                <p class="text-sm text-gray-400 font-medium">Ligas mundiales y eventos en vivo sincronizados automáticamente.</p>
+        <!-- Zona de Aviso de Privacidad e Invitaciones -->
+        <div class="glass-panel p-8 md:p-10 mb-12 flex flex-col md:flex-row items-center justify-between gap-8 fade-in-up delay-300">
+            <div class="flex-1">
+                <h2 class="text-2xl font-bold mb-3 text-white flex items-center gap-3">
+                    <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    Comunidad Estricta
+                </h2>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    FlixLink no es un servicio público. Los scripts funcionan de manera independiente en tu propio dispositivo (Localhost). La activación requiere obligatoriamente un código QR de invitación o un pase alfanumérico generado por un administrador validado. Sin código, la app bloquea el acceso a la red.
+                </p>
             </div>
-            <div class="bg-cardbg border border-borderline p-6 rounded-2xl backdrop-blur-sm">
-                <h3 class="text-cyan-400 font-extrabold text-lg mb-2">Red Privada P2P</h3>
-                <p class="text-sm text-gray-400 font-medium">Accesos gestionados por un sistema criptográfico de invitaciones seguro.</p>
-            </div>
-            <div class="bg-cardbg border border-borderline p-6 rounded-2xl backdrop-blur-sm">
-                <h3 class="text-cyan-400 font-extrabold text-lg mb-2">Rendimiento</h3>
-                <p class="text-sm text-gray-400 font-medium">Filtro de servidores basado en latencia (ping) para máxima fluidez.</p>
+            
+            <!-- Botón de Descarga Global -->
+            <div class="flex-shrink-0 text-center">
+                <a href="https://github.com/proartixproxy-boop/FlixLink" class="glass-button inline-flex items-center gap-3 px-8 py-4 rounded-xl text-lg mb-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Ir al Repositorio de Descarga
+                </a>
+                <span class="block text-xs text-gray-500 font-bold tracking-wider">APK (ANDROID) Y SCRIPT (PC)</span>
             </div>
         </div>
 
-        <!-- Pie de página -->
-        <footer class="pt-10 text-xs text-gray-600 font-bold uppercase tracking-wider">
-            &copy; 2026 FlixLink. Sitio de distribución oficial.
+        <!-- Footer -->
+        <footer class="text-center text-gray-600 text-xs font-bold uppercase tracking-widest mt-auto fade-in-up delay-300">
+            FlixLink Engine Framework &copy; 2026. Desarrollo Privado.
         </footer>
-    </div>
+
+    </main>
 </body>
 </html>
