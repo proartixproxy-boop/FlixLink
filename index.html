@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlixLink Sports - Descarga Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        appbg: '#04060c',
+                        cardbg: 'rgba(13, 20, 36, 0.75)',
+                        borderline: 'rgba(255, 255, 255, 0.08)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-appbg text-white min-h-screen flex flex-col items-center justify-center p-6 font-sans antialiased selection:bg-cyan-500 selection:text-black">
+    
+    <div class="max-w-3xl w-full text-center space-y-10 relative z-10">
+        <!-- Cabecera -->
+        <header class="space-y-4">
+            <h1 class="text-5xl md:text-7xl font-black tracking-tighter text-white">
+                FlixLink<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 italic">Sports</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl font-medium max-w-xl mx-auto">
+                El centro definitivo de streaming deportivo. Competiciones en directo, análisis de latencia en tiempo real y seguridad P2P.
+            </p>
+        </header>
+
+        <!-- Botón de Descarga Principal -->
+        <div class="py-4">
+            <a href="https://github.com/proartixproxy-boop/FlixLink" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-600 text-black font-black text-lg rounded-2xl shadow-[0_10px_30px_rgba(0,242,254,0.3)] hover:scale-105 hover:shadow-[0_10px_40px_rgba(0,242,254,0.5)] transition-all duration-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Descargar APK
+            </a>
+        </div>
+
+        <!-- Características -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-left pt-6">
+            <div class="bg-cardbg border border-borderline p-6 rounded-2xl backdrop-blur-sm">
+                <h3 class="text-cyan-400 font-extrabold text-lg mb-2">Catálogo Global</h3>
+                <p class="text-sm text-gray-400 font-medium">Ligas mundiales y eventos en vivo sincronizados automáticamente.</p>
+            </div>
+            <div class="bg-cardbg border border-borderline p-6 rounded-2xl backdrop-blur-sm">
+                <h3 class="text-cyan-400 font-extrabold text-lg mb-2">Red Privada P2P</h3>
+                <p class="text-sm text-gray-400 font-medium">Accesos gestionados por un sistema criptográfico de invitaciones seguro.</p>
+            </div>
+            <div class="bg-cardbg border border-borderline p-6 rounded-2xl backdrop-blur-sm">
+                <h3 class="text-cyan-400 font-extrabold text-lg mb-2">Rendimiento</h3>
+                <p class="text-sm text-gray-400 font-medium">Filtro de servidores basado en latencia (ping) para máxima fluidez.</p>
+            </div>
+        </div>
+
+        <!-- Pie de página -->
+        <footer class="pt-10 text-xs text-gray-600 font-bold uppercase tracking-wider">
+            &copy; 2026 FlixLink. Sitio de distribución oficial.
+        </footer>
+    </div>
+</body>
+</html>
