@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#04060c">
-    <title>FlixLink - Tu Streaming Total</title>
+    <title>FlixLink - Privado</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             --bg: #04060c;
@@ -13,7 +15,7 @@
             --cyan: #00f2fe;
             --blue: #0066ff;
             --purple: #8b5cf6;
-            --glass: linear-gradient(135deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .012));
+            --glass: linear-gradient(135deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .01));
             --border: rgba(255, 255, 255, .12);
         }
 
@@ -33,68 +35,91 @@
             overflow-x: hidden;
             color: var(--text);
             background: var(--bg);
-            background-image:
-                radial-gradient(circle at 8% 8%, rgba(0, 242, 254, .12), transparent 32rem),
-                radial-gradient(circle at 92% 88%, rgba(0, 102, 255, .14), transparent 34rem),
-                radial-gradient(circle at 50% 50%, rgba(139, 92, 246, .08), transparent 40rem);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             position: relative;
-            animation: backgroundShift 15s ease-in-out infinite;
         }
 
-        @keyframes backgroundShift {
-            0%, 100% {
-                background-image:
-                    radial-gradient(circle at 8% 8%, rgba(0, 242, 254, .12), transparent 32rem),
-                    radial-gradient(circle at 92% 88%, rgba(0, 102, 255, .14), transparent 34rem);
+        /* --- FONDO CON ANIMACIÓN CONTINUA --- */
+        .animated-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: radial-gradient(circle at 50% 50%, #080d1a, var(--bg));
+            overflow: hidden;
+        }
+
+        /* Esferas de luz animadas en segundo plano */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.35;
+            animation: floatOrb 18s ease-in-out infinite alternate;
+        }
+
+        .orb-1 {
+            width: 35rem;
+            height: 35rem;
+            background: var(--cyan);
+            top: -10rem;
+            left: -10rem;
+            animation-duration: 14s;
+        }
+
+        .orb-2 {
+            width: 40rem;
+            height: 40rem;
+            background: var(--blue);
+            bottom: -12rem;
+            right: -10rem;
+            animation-duration: 20s;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 30rem;
+            height: 30rem;
+            background: var(--purple);
+            top: 40%;
+            left: 30%;
+            animation-duration: 16s;
+            animation-delay: -10s;
+        }
+
+        @keyframes floatOrb {
+            0% {
+                transform: translate(0, 0) scale(1);
             }
             50% {
-                background-image:
-                    radial-gradient(circle at 20% 20%, rgba(0, 242, 254, .18), transparent 32rem),
-                    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, .2), transparent 34rem);
+                transform: translate(120px, 80px) scale(1.2);
             }
+            100% {
+                transform: translate(-80px, 150px) scale(0.9);
+            }
+        }
+
+        /* Malla sutil en movimiento */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+            animation: gridPulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes gridPulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
         }
 
         ::selection {
             background: var(--cyan);
             color: #000;
-        }
-
-        .ambient-glow {
-            position: fixed;
-            width: 24rem;
-            height: 24rem;
-            border-radius: 50%;
-            filter: blur(110px);
-            opacity: .13;
-            pointer-events: none;
-            z-index: 0;
-            animation: glowPulse 4s ease-in-out infinite;
-        }
-
-        .glow-one {
-            top: -10rem;
-            left: -10rem;
-            background: var(--cyan);
-            animation-delay: 0s;
-        }
-
-        .glow-two {
-            right: -10rem;
-            bottom: -10rem;
-            background: var(--blue);
-            animation-delay: 2s;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% {
-                opacity: .13;
-                transform: scale(1);
-            }
-            50% {
-                opacity: .2;
-                transform: scale(1.1);
-            }
         }
 
         main {
@@ -103,97 +128,105 @@
             width: min(1120px, calc(100% - 2rem));
             min-height: 100vh;
             margin: auto;
-            padding: 4.5rem 0 2rem;
-            animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            padding: 3rem 0 2rem;
         }
 
         header {
             margin: 0 auto 3.5rem;
             text-align: center;
-            animation: slideDown 1.2s ease-out;
         }
 
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Contenedor de las dos pastillas */
+        .pills-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .badge {
-            display: inline-block;
-            margin-bottom: 1rem;
-            padding: .45rem 1rem;
-            border: 1px solid rgba(0, 242, 254, .3);
-            border-radius: 999px;
-            color: var(--cyan);
-            background: rgba(0, 242, 254, .08);
-            font-size: .75rem;
-            font-weight: 800;
-            letter-spacing: .14em;
-            text-transform: uppercase;
-            backdrop-filter: blur(12px);
-            animation: badgeGlow 2s ease-in-out infinite;
+        /* Pastilla 1: Logo */
+        .brand-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.45rem 1.1rem 0.45rem 0.7rem;
+            border-radius: 9999px;
+            background: rgba(12, 19, 34, 0.8);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 242, 254, 0.2);
+            transition: all 0.3s ease;
         }
 
-        @keyframes badgeGlow {
-            0%, 100% {
-                box-shadow: 0 0 10px rgba(0, 242, 254, .2);
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(0, 242, 254, .4);
-            }
+        .brand-pill:hover {
+            border-color: rgba(0, 242, 254, 0.6);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 242, 254, 0.35);
+            transform: scale(1.03);
         }
 
-        h1 {
-            margin: 0 0 1rem;
-            font-size: clamp(2.8rem, 8vw, 5.8rem);
-            line-height: .95;
-            letter-spacing: -.06em;
-            animation: titleGlow 3s ease-in-out infinite;
+        .brand-icon-box {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.5));
         }
 
-        @keyframes titleGlow {
-            0%, 100% {
-                text-shadow: 0 0 20px rgba(0, 242, 254, .3);
-            }
-            50% {
-                text-shadow: 0 0 40px rgba(0, 242, 254, .6);
-            }
-        }
-
-        .gradient {
-            color: transparent;
-            background: linear-gradient(90deg, var(--cyan), var(--blue), var(--purple));
-            background-clip: text;
+        .brand-name {
+            font-size: 1.05rem;
+            font-weight: 850;
+            letter-spacing: -0.3px;
+            background: linear-gradient(180deg, #ffffff 40%, var(--cyan) 100%);
             -webkit-background-clip: text;
-            font-style: italic;
-            animation: gradientShift 4s ease infinite;
-            background-size: 200% 200%;
+            -webkit-text-fill-color: transparent;
         }
 
-        @keyframes gradientShift {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
+        /* Pastilla 2: Uso Privado */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.52rem 1.05rem;
+            border-radius: 9999px;
+            background: rgba(139, 92, 246, 0.12);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 0 15px rgba(139, 92, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .status-pill:hover {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(139, 92, 246, 0.35);
+            transform: scale(1.03);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--purple);
+            box-shadow: 0 0 10px var(--purple);
+            animation: pulseDot 2s infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .status-text {
+            font-size: 0.88rem;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            color: #d8b4fe;
+            text-transform: uppercase;
         }
 
         .intro {
@@ -202,25 +235,13 @@
             color: var(--muted);
             font-size: clamp(1rem, 2vw, 1.2rem);
             line-height: 1.7;
-            animation: fadeInUp 1.5s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.2rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
         }
 
         .glass {
@@ -249,22 +270,18 @@
             width: 200%;
             height: 200%;
             background: linear-gradient(
-                    45deg,
-                    transparent 40%,
-                    rgba(0, 242, 254, .1) 45%,
-                    transparent 50%
+                45deg,
+                transparent 40%,
+                rgba(0, 242, 254, .1) 45%,
+                transparent 50%
             );
             animation: shine 6s infinite;
             pointer-events: none;
         }
 
         @keyframes shine {
-            0% {
-                transform: translateX(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) rotate(45deg);
-            }
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
         }
 
         .card:hover {
@@ -291,10 +308,6 @@
             transform: scale(1.1) rotate(360deg);
             background: rgba(0, 242, 254, .2);
             border-color: var(--cyan);
-        }
-
-        h2, h3 {
-            margin-top: 0;
         }
 
         h3 {
@@ -356,24 +369,6 @@
             overflow: hidden;
         }
 
-        .button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, .3);
-            transform: translate(-50%, -50%);
-            transition: width .6s, height .6s;
-        }
-
-        .button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
         .button:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 9px 28px rgba(0, 242, 254, .45), 0 0 50px rgba(0, 242, 254, .3);
@@ -388,37 +383,23 @@
             letter-spacing: .1em;
         }
 
+        .ad-container {
+            margin: 2.5rem auto 1rem;
+        }
+
         footer {
-            margin-top: 2.5rem;
+            margin-top: 2rem;
             color: #475569;
             font-size: .7rem;
             font-weight: 800;
             letter-spacing: .14em;
             text-align: center;
             text-transform: uppercase;
-            animation: footerGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes footerGlow {
-            0%, 100% {
-                text-shadow: 0 0 10px rgba(0, 242, 254, .2);
-            }
-            50% {
-                text-shadow: 0 0 20px rgba(0, 242, 254, .4);
-            }
         }
 
         @media (max-width: 760px) {
-            main {
-                padding-top: 3rem;
-            }
-
             .grid {
                 grid-template-columns: 1fr;
-            }
-
-            .card {
-                min-height: auto;
             }
 
             .notice {
@@ -435,66 +416,89 @@
                 text-align: center;
             }
         }
-
-        /* Animación de carga inicial */
-        @keyframes loading {
-            0% {
-                opacity: 0;
-                transform: scale(.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        main > * {
-            animation: loading .8s ease-out;
-        }
-
-        main > *:nth-child(1) { animation-delay: .1s; }
-        main > *:nth-child(2) { animation-delay: .2s; }
-        main > *:nth-child(3) { animation-delay: .3s; }
-        main > *:nth-child(4) { animation-delay: .4s; }
     </style>
 </head>
 <body>
-<div class="ambient-glow glow-one"></div>
-<div class="ambient-glow glow-two"></div>
-<main>
-    <header>
-        <div class="badge">🔒 Acceso exclusivo</div>
-        <h1>FlixLink</h1>
-        <p class="intro">Todo el deporte y entretenimiento que te gusta, en un solo lugar. Fútbol, motor, cine y series en español, cuando quieras y donde quieras.</p>
-    </header>
-    <section class="grid" aria-label="Contenido disponible">
-        <article class="glass card">
-            <div class="icon">⚽</div>
-            <h3>Todo el Deporte en Directo</h3>
-            <p>Fútbol, F1, MotoGP y mucho más. Disfruta de tus competiciones favoritas en vivo y sin cortes.</p>
-        </article>
-        <article class="glass card">
-            <div class="icon">🎬</div>
-            <h3>Cine y Series sin Límites</h3>
-            <p>Los últimos estrenos, las series de moda y tus películas favoritas. Todo en castellano y listo para ver.</p>
-        </article>
-        <article class="glass card">
-            <div class="icon">❤️</div>
-            <h3>Tu Lista de Favoritos</h3>
-            <p>Guarda lo que te gusta y vuelve a verlo cuando quieras. Tu colección personal siempre disponible.</p>
-        </article>
-    </section>
-    <section class="glass notice">
-        <div>
-            <h2>⚡ Acceso por Invitación</h2>
-            <p>FlixLink es una comunidad privada. Para entrar necesitas un código de invitación de alguien que ya esté dentro.</p>
+
+    <!-- FONDO ANIMADO CSS -->
+    <div class="animated-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <div class="bg-grid"></div>
+
+    <main>
+        <header>
+            <div class="pills-container">
+                <!-- Pastilla Izquierda: Logo -->
+                <a href="#" class="brand-pill">
+                    <div class="brand-icon-box">
+                        <svg viewBox="0 0 100 100" fill="none" style="width: 100%; height: 100%;">
+                            <defs>
+                                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f2fe" />
+                                    <stop offset="100%" stop-color="#0066ff" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M50 25 L78 39 L50 53 L22 39 Z" stroke="url(#logoGrad)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round" />
+                            <path d="M22 53 L50 67 L78 53" stroke="url(#logoGrad)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round" />
+                            <path d="M22 67 L50 81 L78 67" stroke="url(#logoGrad)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <span class="brand-name">FlixLink</span>
+                </a>
+
+                <!-- Pastilla Derecha: Uso Privado -->
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Uso Privado</span>
+                </div>
+            </div>
+            <p class="intro">Todo el deporte y entretenimiento que te gusta, en un solo lugar. Fútbol, motor, cine y series en español, cuando quieras y donde quieras.</p>
+        </header>
+
+        <section class="grid" aria-label="Contenido disponible">
+            <article class="glass card">
+                <div class="icon">⚽</div>
+                <h3>Todo el Deporte en Directo</h3>
+                <p>Fútbol, F1, MotoGP y mucho más. Disfruta de tus competiciones favoritas en vivo y sin cortes.</p>
+            </article>
+            <article class="glass card">
+                <div class="icon">🎬</div>
+                <h3>Cine y Series sin Límites</h3>
+                <p>Los últimos estrenos, las series de moda y tus películas favoritas. Todo en castellano y listo para ver.</p>
+            </article>
+            <article class="glass card">
+                <div class="icon">❤️</div>
+                <h3>Tu Lista de Favoritos</h3>
+                <p>Guarda lo que te gusta y vuelve a verlo cuando quieras. Tu colección personal siempre disponible.</p>
+            </article>
+        </section>
+
+        <section class="glass notice">
+            <div>
+                <h2>⚡ Acceso por Invitación</h2>
+                <p>FlixLink es una comunidad privada. Para entrar necesitas un código de invitación de alguien que ya esté dentro.</p>
+            </div>
+            <div class="download">
+                <a class="button" href="https://github.com/proartixproxy-boop/FlixLink" target="_blank" rel="noopener">📲 Descargar App</a>
+                <small>ANDROID · PC · TV</small>
+            </div>
+        </section>
+
+        <!-- BEGIN AADS AD UNIT 2453207 -->
+        <div id="frame" class="ad-container" style="width: 100%; position: relative; z-index: 99998;">
+            <iframe data-aa='2453207' src='//acceptable.a-ads.com/2453207/?size=Adaptive'
+                    style='border:0; padding:0; width:70%; height:auto; overflow:hidden; display: block; margin: auto'></iframe>
         </div>
-        <div class="download">
-            <a class="button" href="https://github.com/proartixproxy-boop/FlixLink" target="_blank" rel="noopener">📲 Descargar App</a>
-            <small>ANDROID · PC · TV</small>
-        </div>
-    </section>
-    <footer>FlixLink © 2026 · Tu streaming total</footer>
-</main>
+        <!-- END AADS AD UNIT 2453207 -->
+
+        <footer>FlixLink © 2026 · Privado</footer>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
